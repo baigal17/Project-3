@@ -5,7 +5,8 @@
 
 ## List of Data Sourcers/Technology
 
-- Python,
+- Python
+- Web3
 - Pandas
 - Solidity
 - Streamlit
