@@ -21,3 +21,5 @@
 
 ## Functionality of the app 
 ** The app will allow doctors and any other necessary parties to access and edit a patient's sensitive information. The app will feature blockchain ID number as a way to see a patient's health records including their medical history. 
+ Bip-44 encryption tech, token(patient's info) to doctors and patients.
+ 
