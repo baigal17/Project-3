@@ -6,15 +6,20 @@ from web3 import Web3
 w3 = Web3(Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 
 ################################################################################
+# Streamlit application headings
+st.markdown("# Health Records")
+st.markdown("## Select a Patient")
+st.text(" \n")
+
 # Patients' Personal Information
 
 # Database of multiple patients' personal information
 patients_database = {
-    "George": ["George", "16", "5'11", "3", "Images/George.jpg"],
-    "Jane": ["Jane", "21", "5'4", "5", "Images/Jane.jpg"],
-    "Karen": ["Karen", "55", "5'7", "3", "Images/Karen.jpg"],
-    "Luke": ["Luke", "1", "2", "5", "Images/Luke.jpg"],
-    "Tom": ["Tom", "65", "6'2", "2.5", "Images/Tom.jpg"]
+    "George": ["George", "16", "5'11", "30", "Images/George.jpg"],
+    "Jane": ["Jane", "21", "5'4", "50", "Images/Jane.jpg"],
+    "Karen": ["Karen", "55", "5'7", "30", "Images/Karen.jpg"],
+    "Luke": ["Luke", "1", "2", "50", "Images/Luke.jpg"],
+    "Tom": ["Tom", "65", "6'2", "25", "Images/Tom.jpg"]
 }
 
 # A list of the patients' first names
@@ -38,9 +43,6 @@ def get_people(w3):
 # Streamlit Code
 get_people(w3)
 
-# Streamlit application headings
-st.markdown("# Health Records")
-st.text(" \n")
 
 ################################################################################
 # Streamlit Sidebar Code - Start
@@ -52,7 +54,7 @@ st.sidebar.markdown("## Patients' Details")
 person = st.sidebar.selectbox('Select a Person', people)
 
 # Create a input field to record the number of hours the candidate worked
-health_score = st.sidebar.slider("Number of Health Score:")
+health_score = st.sidebar.slider("Range of Health Score:", value=(0, 50))
 
 text = st.sidebar.text_area("Any additional information")
 
@@ -70,5 +72,10 @@ for uploaded_file in uploaded_files:
      st.write(bytes_data)
 
 
+text_contents = '''This is text file'''
+st.sidebar.download_button('Download text file', text_contents)
 
 
+if st.sidebar.button("Send Information"):
+       
+    st.balloons()
