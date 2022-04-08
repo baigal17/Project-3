@@ -15,11 +15,11 @@ st.text(" \n")
 
 # Database of multiple patients' personal information
 patients_database = {
-    "George": ["George", "16", "5'11", "30", "Images/George.jpg"],
+    "George": ["George", "16", "5'11", "80", "Images/George.jpg"],
     "Jane": ["Jane", "21", "5'4", "50", "Images/Jane.jpg"],
     "Karen": ["Karen", "55", "5'7", "30", "Images/Karen.jpg"],
-    "Luke": ["Luke", "1", "2", "50", "Images/Luke.jpg"],
-    "Tom": ["Tom", "65", "6'2", "25", "Images/Tom.jpg"]
+    "Luke": ["Luke", "1", "2", "100", "Images/Luke.jpg"],
+    "Tom": ["Tom", "65", "6'2", "50", "Images/Tom.jpg"]
 }
 
 # A list of the patients' first names
@@ -53,9 +53,10 @@ st.sidebar.markdown("## Patients' Details")
 # Create a select box to select a patient
 person = st.sidebar.selectbox('Select a Person', people)
 
-# Create a input field to record the number of hours the candidate worked
-health_score = st.sidebar.slider("Range of Health Score:", value=(0, 50))
+# Create a slider to measure each patient's health score in a range of 0 through 100.
+health_score = st.sidebar.slider("Range of Health Score:", value=(0, 100))
 
+# Create a textbox for doctors to leave additional information for each patient.  
 text = st.sidebar.text_area("Any additional information")
 
 if st.sidebar.button('Save'):
@@ -63,6 +64,7 @@ if st.sidebar.button('Save'):
 else:
     st.sidebar.write('Edit')
 
+# Create a button for parties to upload any additional information. 
 st.sidebar.markdown("## Upload Additional Information!")
 
 data = uploaded_files = st.sidebar.file_uploader("Choose a CSV file", accept_multiple_files=True)
@@ -71,11 +73,16 @@ for uploaded_file in uploaded_files:
      st.write("filename:", uploaded_file.name)
      st.write(bytes_data)
 
-
+# Create a download text file.
 text_contents = '''This is text file'''
 st.sidebar.download_button('Download text file', text_contents)
 
 
+# Sending Information to Blockchain
 if st.sidebar.button("Send Information"):
+    transaction_hash = send_transaction("name", "age", "health_score")
+
+    st.sidebar.markdown("#### Validated Transaction Hash")
+    st.sidebar.write(transaction_hash)
        
     st.balloons()
